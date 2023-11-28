@@ -347,7 +347,7 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: f9c665ba37aedd240b7c615777c1f525, type: 3}
   - {fileID: 919132149155446097, guid: a930b266f669fab48ab4ffb8ee7eaa86, type: 3}
   - {fileID: 919132149155446097, guid: 55a387ef637f30f42bb21b03997afbf6, type: 3}
-  semaphorePrefab: {fileID: 919132149155446097, guid: 6a24e9b28b4f6354e9d33ce78c89e891, type: 3}
+  semaphorePrefab: {fileID: 919132149155446097, guid: dd00d7e036579b74c99aac3c22ac19cf, type: 3}
   tileSize: 1
 --- !u!4 &1457529884
 Transform:

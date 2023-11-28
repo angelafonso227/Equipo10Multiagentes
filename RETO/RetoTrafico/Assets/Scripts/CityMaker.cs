@@ -52,25 +52,71 @@ public class CityMaker : MonoBehaviour
                 tile.transform.parent = transform;
                 x += 1;
             }
-            else if (tiles[i] == 's')
+            else if (tiles[i] == '8' || tiles[i] == '9')
             {
                 position = new Vector3(x * tileSize, 0, y * tileSize);
                 tile = Instantiate(roadPrefab, position, Quaternion.identity);
                 tile.transform.parent = transform;
-                tile = Instantiate(semaphorePrefab, position, Quaternion.identity);
-                tile.transform.parent = transform;
                 x += 1;
             }
-            else if (tiles[i] == 'S')
+            else if (tiles[i] == '6' || tiles[i] == '7')
             {
                 position = new Vector3(x * tileSize, 0, y * tileSize);
                 tile = Instantiate(roadPrefab, position, Quaternion.Euler(0, 90, 0));
                 tile.transform.parent = transform;
-                tile = Instantiate(semaphorePrefab, position, Quaternion.Euler(0, 90, 0));
+                x += 1;
+            }
+            else if (tiles[i] == '1' || tiles[i] == '2')
+            {
+                position = new Vector3(x * tileSize, 0, y * tileSize);
+                tile = Instantiate(roadPrefab, position, Quaternion.identity);
+                tile.transform.parent = transform;
+                x += 1;
+            }
+            else if (tiles[i] == '3' || tiles[i] == '4')
+            {
+                position = new Vector3(x * tileSize, 0, y * tileSize);
+                tile = Instantiate(roadPrefab, position, Quaternion.Euler(0, 90, 0));
                 tile.transform.parent = transform;
                 x += 1;
             }
             else if (tiles[i] == 'D')
+            {
+                position = new Vector3(x * tileSize, 0, y * tileSize);
+                tile = Instantiate(roadPrefab, position, Quaternion.Euler(0, 90, 0));
+                tile.transform.parent = transform;
+                tile = Instantiate(semaphorePrefab, new Vector3(position.x, position.y + 1, position.z), Quaternion.Euler(0, 90, 0));
+                tile.transform.parent = transform;
+                x += 1;
+            }
+            else if (tiles[i] == 'U')
+            {
+                position = new Vector3(x * tileSize, 0, y * tileSize);
+                tile = Instantiate(roadPrefab, position, Quaternion.Euler(0, 90, 0));
+                tile.transform.parent = transform;
+                tile = Instantiate(semaphorePrefab, new Vector3(position.x, position.y + 1, position.z), Quaternion.Euler(0, -90, 0));
+                tile.transform.parent = transform;
+                x += 1;
+            }
+            else if (tiles[i] == 'l')
+            {
+                position = new Vector3(x * tileSize, 0, y * tileSize);
+                tile = Instantiate(roadPrefab, position, Quaternion.identity);
+                tile.transform.parent = transform;
+                tile = Instantiate(semaphorePrefab, new Vector3(position.x, position.y + 1, position.z), Quaternion.Euler(0, 180, 0));
+                tile.transform.parent = transform;
+                x += 1;
+            }
+            else if (tiles[i] == 'r')
+            {
+                position = new Vector3(x * tileSize, 0, y * tileSize);
+                tile = Instantiate(roadPrefab, position, Quaternion.identity);
+                tile.transform.parent = transform;
+                tile = Instantiate(semaphorePrefab, new Vector3(position.x, position.y + 1, position.z), Quaternion.identity);
+                tile.transform.parent = transform;
+                x += 1;
+            }
+            else if (tiles[i] == 'F')
             {
                 int rand = Random.Range(0, buildingPrefab.Length);
 
@@ -86,17 +132,6 @@ public class CityMaker : MonoBehaviour
 
                 position = new Vector3(x * tileSize, 0, y * tileSize);
                 tile = Instantiate(buildingPrefab[rand], position, Quaternion.identity);
-                tile.transform.localScale = new Vector3(1, Random.Range(0.5f, 2.0f), 1);
-                tile.transform.parent = transform;
-                x += 1;
-            }
-
-            //maybe no sirve
-            else if (tiles[i] == 'C')
-            {
-                int rand = Random.Range(0, carPrefab.Length);
-                position = new Vector3(x * tileSize, 0, y * tileSize);
-                tile = Instantiate(carPrefab[rand], position, Quaternion.identity);
                 tile.transform.localScale = new Vector3(1, Random.Range(0.5f, 2.0f), 1);
                 tile.transform.parent = transform;
                 x += 1;
