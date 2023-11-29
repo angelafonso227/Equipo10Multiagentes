@@ -1,8 +1,9 @@
 from mesa import Model
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
-from agent import *
+from randomAgents.agent import Car, Destination, Obstacle, Traffic_Light, Road
 import json
+import random
 
 class CityModel(Model):
     """ 
