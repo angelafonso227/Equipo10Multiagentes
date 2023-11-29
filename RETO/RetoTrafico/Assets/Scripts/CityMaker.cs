@@ -121,6 +121,8 @@ public class CityMaker : MonoBehaviour
                 int rand = Random.Range(0, buildingPrefab.Length);
 
                 position = new Vector3(x * tileSize, 0, y * tileSize);
+                tile = Instantiate(roadPrefab, position, Quaternion.identity);
+                tile.transform.parent = transform;
                 tile = Instantiate(buildingPrefab[rand], position, Quaternion.Euler(0, 90, 0));
                 tile.GetComponentInChildren<Renderer>().materials[0].color = Color.red;
                 tile.transform.parent = transform;
@@ -131,6 +133,8 @@ public class CityMaker : MonoBehaviour
                 int rand = Random.Range(0, buildingPrefab.Length);
 
                 position = new Vector3(x * tileSize, 0, y * tileSize);
+                tile = Instantiate(roadPrefab, position, Quaternion.identity);
+                tile.transform.parent = transform;
                 tile = Instantiate(buildingPrefab[rand], position, Quaternion.identity);
                 tile.transform.localScale = new Vector3(1, Random.Range(0.5f, 2.0f), 1);
                 tile.transform.parent = transform;

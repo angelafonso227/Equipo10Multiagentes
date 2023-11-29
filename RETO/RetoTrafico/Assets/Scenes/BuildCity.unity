@@ -341,7 +341,7 @@ MonoBehaviour:
   carPrefab:
   - {fileID: 919132149155446097, guid: 3bb0a5f19b9bc4743b9d2d8ca43d8a30, type: 3}
   layout: {fileID: 4900000, guid: 4bcd2757fd9d2194a88e02e7f4937dfd, type: 3}
-  roadPrefab: {fileID: 3240343348373693069, guid: 646fc54ff3078ce94bbdbd0f0d4c4a05, type: 3}
+  roadPrefab: {fileID: 981349936563920334, guid: 381b2e488c4b0e441879ca8c13eb9e5e, type: 3}
   buildingPrefab:
   - {fileID: 919132149155446097, guid: 7aded65f89ea1c04bbdd1994a70b19f6, type: 3}
   - {fileID: 919132149155446097, guid: f9c665ba37aedd240b7c615777c1f525, type: 3}
