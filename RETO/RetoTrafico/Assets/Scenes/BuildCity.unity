@@ -340,7 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPrefab:
   - {fileID: 919132149155446097, guid: 3bb0a5f19b9bc4743b9d2d8ca43d8a30, type: 3}
-  layout: {fileID: 4900000, guid: 1bd49f2e04cdbec48bb774669bd2140d, type: 3}
+  layout: {fileID: 4900000, guid: 4bcd2757fd9d2194a88e02e7f4937dfd, type: 3}
   roadPrefab: {fileID: 3240343348373693069, guid: 646fc54ff3078ce94bbdbd0f0d4c4a05, type: 3}
   buildingPrefab:
   - {fileID: 919132149155446097, guid: 7aded65f89ea1c04bbdd1994a70b19f6, type: 3}
