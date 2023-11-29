@@ -4,9 +4,10 @@
 
 from flask import Flask, request, jsonify
 # from randomAgents.model import RandomModel
-from randomAgents.model import CityModel
+from model import CityModel
 # from randomAgents.agent import RandomAgent, ObstacleAgent
-from randomAgents.agent import Car, Road, Traffic_Light, Destination, Obstacle
+from agent import Car, Road, Traffic_Light, Destination, Obstacle
+
 
 
 app = Flask("Traffic example")
