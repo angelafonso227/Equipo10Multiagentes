@@ -23,6 +23,7 @@ public class AgentData
     */
     public string id;
     public float x, y, z;
+    public bool estado;
 
     public AgentData(string id, float x, float y, float z)
     {
@@ -30,6 +31,16 @@ public class AgentData
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public AgentData(string id, float x, float y, float z, bool estado)
+    {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.estado = estado;
+
     }
 }
 
@@ -44,6 +55,7 @@ public class AgentsData
         positions (list): A list of AgentData objects.
     */
     public List<AgentData> positions;
+    public List<AgentData> estado;
 
     public AgentsData() => this.positions = new List<AgentData>();
 }
@@ -84,14 +96,14 @@ public class AgentController : MonoBehaviour
     string getRoadsEndpoint = "/getRoads";
     string getTrafficLightsEndpoint = "/getTrafficLights";
     string getDestinationsEndpoint = "/getDestinations";
-    AgentsData agentsData, obstacleData;
+    AgentsData agentsData, obstacleData, lightData;
     Dictionary<string, GameObject> agents;
     Dictionary<string, Vector3> prevPositions, currPositions;
     Dictionary<string, GameObject> wheels = new Dictionary<string, GameObject>();
 
     bool updated = false, started = false;
 
-    public GameObject agentPrefab, obstaclePrefab, floor, wheelPrefab;
+    public GameObject agentPrefab, obstaclePrefab, floor, wheelPrefab, lightPrefab;
 
     public int NAgents, width, height;
     public float timeToUpdate = 5.0f;
@@ -101,6 +113,7 @@ public class AgentController : MonoBehaviour
     {
         agentsData = new AgentsData();
         obstacleData = new AgentsData();
+        lightData = new AgentsData();
 
         prevPositions = new Dictionary<string, Vector3>();
         currPositions = new Dictionary<string, Vector3>();
@@ -192,6 +205,7 @@ public class AgentController : MonoBehaviour
             // Once the configuration has been sent, it launches a coroutine to get the agents data.
             StartCoroutine(GetAgentsData());
             StartCoroutine(GetObstacleData());
+            StartCoroutine(GetTrafficLightData());
         }
     }
 
@@ -257,6 +271,7 @@ void InstantiateWheel(Vector3 position)
         }
     }
 
+
     IEnumerator GetObstacleData()
     {
         UnityWebRequest www = UnityWebRequest.Get(serverUrl + getObstaclesEndpoint);
@@ -276,4 +291,45 @@ void InstantiateWheel(Vector3 position)
             }
         }
     }
+
+    IEnumerator GetTrafficLightData()
+    {
+        UnityWebRequest www = UnityWebRequest.Get(serverUrl + getTrafficLightsEndpoint);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+            Debug.Log(www.error);
+        else
+        {
+            lightData = JsonUtility.FromJson<AgentsData>(www.downloadHandler.text);
+
+            Debug.Log(lightData.positions);
+
+            foreach (AgentData light in lightData.positions)
+            {
+                GameObject luces = Instantiate(lightPrefab, new Vector3(light.x, light.y + 1, light.z), Quaternion.identity);
+            
+                // Supongamos que la luz tiene un componente de tipo Light. Ajusta esto según tu implementación.
+                Light luzComponent = luces.GetComponent<Light>();
+
+                if (luzComponent != null)
+                {
+                    // Asignar color según el estado de la luz
+                    if (light.estado)
+                    {
+                        luzComponent.color = Color.green;
+                    }
+                    else
+                    {
+                        luzComponent.color = Color.red;
+                    }
+                }
+                else
+                {
+                    Debug.LogError("No se encontró el componente Light en el objeto luces.");
+                }
+            }
+        }
+    }
+
 }

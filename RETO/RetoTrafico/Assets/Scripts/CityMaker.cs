@@ -8,7 +8,8 @@ public class CityMaker : MonoBehaviour
     [SerializeField] TextAsset layout;
     [SerializeField] GameObject roadPrefab;
     [SerializeField] GameObject[] buildingPrefab;
-    [SerializeField] GameObject semaphorePrefab;
+    [SerializeField] GameObject semaphorePrefab;    
+    [SerializeField] GameObject lightPrefab;
     [SerializeField] int tileSize;
 
     // Start is called before the first frame update
@@ -35,6 +36,7 @@ public class CityMaker : MonoBehaviour
 
         Vector3 position;
         GameObject tile;
+        GameObject pointLight;
 
         for (int i = 0; i < tiles.Length; i++)
         {

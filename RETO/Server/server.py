@@ -79,7 +79,7 @@ def getTrafficLights():
     global cityModel
 
     if request.method == 'GET':
-        trafficLightPositions = [{"id": str(agent.unique_id), "x": pos[0], "y":0, "z":pos[1]-1, } 
+        trafficLightPositions = [{"id": str(agent.unique_id), "x": pos[0], "y":0, "z":pos[1]-1, "estado": agent.state} 
                                 for agents, pos in cityModel.grid.coord_iter() 
                                 for agent in agents
                                 if isinstance(agent, Traffic_Light)]

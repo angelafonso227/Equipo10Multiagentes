@@ -208,13 +208,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136675311}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
-  m_LocalPosition: {x: 12, y: 10, z: -1.5}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 11.5, y: 22.3, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &203274195
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,10 +248,11 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 919132149155446097, guid: a930b266f669fab48ab4ffb8ee7eaa86, type: 3}
   floor: {fileID: 8796179709408692567, guid: 2e44e2bc259e1314fb7666cc16f3ff1e, type: 3}
   wheelPrefab: {fileID: 7427346919069892249, guid: 8b22527f9cdf022419deffa36d9f894b, type: 3}
+  lightPrefab: {fileID: 5658102425875608150, guid: bdfc0f1a210d2514cb2ee5babbb9b0dd, type: 3}
   NAgents: 10
   width: 0
   height: 0
-  timeToUpdate: 1
+  timeToUpdate: 0.5
 --- !u!4 &203274197
 Transform:
   m_ObjectHideFlags: 0
@@ -400,6 +401,7 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: a930b266f669fab48ab4ffb8ee7eaa86, type: 3}
   - {fileID: 919132149155446097, guid: 55a387ef637f30f42bb21b03997afbf6, type: 3}
   semaphorePrefab: {fileID: 919132149155446097, guid: dd00d7e036579b74c99aac3c22ac19cf, type: 3}
+  lightPrefab: {fileID: 0}
   tileSize: 1
 --- !u!4 &1457529884
 Transform:
