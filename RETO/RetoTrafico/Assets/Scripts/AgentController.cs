@@ -81,6 +81,9 @@ public class AgentController : MonoBehaviour
     string getObstaclesEndpoint = "/getObstacles";
     string sendConfigEndpoint = "/init";
     string updateEndpoint = "/update";
+    string getRoadsEndpoint = "/getRoads";
+    string getTrafficLightsEndpoint = "/getTrafficLights";
+    string getDestinationsEndpoint = "/getDestinations";
     AgentsData agentsData, obstacleData;
     Dictionary<string, GameObject> agents;
     Dictionary<string, Vector3> prevPositions, currPositions;
@@ -209,10 +212,12 @@ public class AgentController : MonoBehaviour
             {
                 Vector3 newAgentPosition = new Vector3(agent.x, agent.y, agent.z);
 
-                    if(!started)
+                    if (!prevPositions.ContainsKey(agent.id))
                     {
                         prevPositions[agent.id] = newAgentPosition;
                         agents[agent.id] = Instantiate(agentPrefab, newAgentPosition, Quaternion.identity);
+                        agents[agent.id].transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                        
                     }
                     else
                     {

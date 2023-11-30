@@ -1,7 +1,7 @@
 from mesa import Model
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
-from agent import Car, Destination, Obstacle, Traffic_Light, Road
+from randomAgents.agent import Car, Destination, Obstacle, Traffic_Light, Road
 import json
 import random
 
@@ -19,6 +19,8 @@ class CityModel(Model):
 
         self.num_agents = N
         self.traffic_lights = []
+        self.destinations_positions = [(4, 22), (13, 22), (11, 20), (21, 20), (3, 19), (2, 15), (21, 15), (5, 14), (11, 14), (17, 14), (19, 7), (2, 6), (11, 6), (5, 4), (14, 3), (21, 3)]
+        
 
         # Load the map file. The map file is a text file where each character represents an agent.
         with open('D:/Documentos/ACTIVIDADES TEC/QUINTO SEMESTRE/Multiagentes/Equipo10Multiagentes/RETO/Server/randomAgents/city_files/2023_base.txt') as baseFile:
@@ -35,8 +37,6 @@ class CityModel(Model):
                 pos = (0, 0)
                 self.grid.place_agent(a, pos)
                 
-            self.destinations_positions = []
-
             # Goes through each character in the map file and creates the corresponding agent.
             for r, row in enumerate(lines):
                 for c, col in enumerate(row):
@@ -63,7 +63,7 @@ class CityModel(Model):
                         self.destinations_positions.append((x, y))
                         
                         
-            print(self.destinations_positions)
+            print("Destinations: ", self.destinations_positions)
         
         self.running = True
 
@@ -79,7 +79,7 @@ class CityModel(Model):
     def step(self):
         '''Advance the model by one step.'''
         # Añade un nuevo carro cada 4 pasos
-        if self.schedule.steps % 4 == 0:
+        if self.schedule.steps % 50 == 0:
             if self.num_agents <=3000:
                 self.add_car()
             else: 

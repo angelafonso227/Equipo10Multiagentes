@@ -4,9 +4,9 @@
 
 from flask import Flask, request, jsonify
 # from randomAgents.model import RandomModel
-from model import CityModel
+from randomAgents.model import CityModel
 # from randomAgents.agent import RandomAgent, ObstacleAgent
-from agent import Car, Road, Traffic_Light, Destination, Obstacle
+from randomAgents.agent import Car, Road, Traffic_Light, Destination, Obstacle
 
 
 
@@ -24,7 +24,7 @@ def initModel():
 
         print(request.form)
         # print(number_agents, width, height)
-        cityModel = CityModel()
+        cityModel = CityModel(1)
 
         return jsonify({"message":"Parameters recieved, model initiated."})
 
@@ -59,12 +59,20 @@ def getRoads():
     global cityModel
 
     if request.method == 'GET':
-        roadPositions = [{"id": str(agent.unique_id), "x": pos[0], "y":0, "z":pos[1]} 
-                          for agents, pos in cityModel.grid.coord_iter() 
-                          for agent in agents
-                          if isinstance(agent, Road)]
+        roadPositions = [
+            {
+                "id": str(agent.unique_id),
+                "x": pos[0],
+                "y": 0,
+                "z": pos[1],
+                "direction": agent.direction  # Agregamos la dirección del road tile
+            }
+            for agents, pos in cityModel.grid.coord_iter() 
+            for agent in agents
+            if isinstance(agent, Road)
+        ]
 
-        return jsonify({'positions':roadPositions})
+        return jsonify({'positions': roadPositions})
 
 @app.route('/getTrafficLights', methods=['GET'])
 def getTrafficLights():
@@ -110,5 +118,5 @@ def updateModel():
         currentStep += 1
         return jsonify({'message':f'Model updated to step {currentStep}.', 'currentStep':currentStep})
 
-if __name__=='main_':
+if __name__=='__main__':
     app.run(host="localhost", port=8585, debug=True)
