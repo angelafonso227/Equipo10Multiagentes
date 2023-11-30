@@ -90,7 +90,7 @@ public class AgentController : MonoBehaviour
 
     bool updated = false, started = false;
 
-    public GameObject agentPrefab, obstaclePrefab, floor;
+    public GameObject agentPrefab, obstaclePrefab, floor, ruedish;
     public int NAgents, width, height;
     public float timeToUpdate = 5.0f;
     private float timer, dt;

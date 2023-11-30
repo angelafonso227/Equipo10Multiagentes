@@ -250,7 +250,7 @@ MonoBehaviour:
   NAgents: 10
   width: 0
   height: 0
-  timeToUpdate: 0.1
+  timeToUpdate: 0.05
 --- !u!4 &203274197
 Transform:
   m_ObjectHideFlags: 0

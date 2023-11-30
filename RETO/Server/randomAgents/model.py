@@ -16,7 +16,7 @@ class CityModel(Model):
     def __init__(self, N):
 
         # Load the map dictionary. The dictionary maps the characters in the map file to the corresponding agent.
-        dataDictionary = json.load(open("C:\\Users\\danie\\Documents\\SistemasMultiagentes\\Equipo10Multiagentes\\reto\Server\\randomAgents\\city_files\\mapDictionary.json"))
+        dataDictionary = json.load(open('D:/Documentos/ACTIVIDADES TEC/QUINTO SEMESTRE/Multiagentes/Equipo10Multiagentes/RETO/Server/randomAgents/city_files/mapDictionary.json'))
 
         self.num_agents = N
         self.traffic_lights = []
@@ -24,7 +24,7 @@ class CityModel(Model):
         
 
         # Load the map file. The map file is a text file where each character represents an agent.
-        with open('C:\\Users\\danie\\Documents\\SistemasMultiagentes\\Equipo10Multiagentes\\RETO\\Server\\randomAgents\\city_files\\2023_base.txt') as baseFile:
+        with open('D:/Documentos/ACTIVIDADES TEC/QUINTO SEMESTRE/Multiagentes/Equipo10Multiagentes/RETO/Server/randomAgents/city_files/2023_base.txt') as baseFile:
             lines = baseFile.readlines()
             self.width = len(lines[0])-1
             self.height = len(lines)
