@@ -87,10 +87,12 @@ public class AgentController : MonoBehaviour
     AgentsData agentsData, obstacleData;
     Dictionary<string, GameObject> agents;
     Dictionary<string, Vector3> prevPositions, currPositions;
+    Dictionary<string, GameObject> wheels = new Dictionary<string, GameObject>();
 
     bool updated = false, started = false;
 
-    public GameObject agentPrefab, obstaclePrefab, floor, ruedish;
+    public GameObject agentPrefab, obstaclePrefab, floor, wheelPrefab;
+
     public int NAgents, width, height;
     public float timeToUpdate = 5.0f;
     private float timer, dt;
@@ -218,6 +220,21 @@ public class AgentController : MonoBehaviour
                     agents[agent.id] = Instantiate(agentPrefab, newAgentPosition, Quaternion.identity);
                     agents[agent.id].transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 
+                    // Instancia de ruedas y las hace hijos del objeto principal
+                    GameObject wheel1 = Instantiate(wheelPrefab, newAgentPosition + new Vector3(0.2f, 0.055f, 0.288f), Quaternion.Euler(0, 0, 0));
+                    GameObject wheel2 = Instantiate(wheelPrefab, newAgentPosition + new Vector3(0.2f, 0.055f, -0.255f), Quaternion.Euler(0, 0, 0));
+                    GameObject wheel3 = Instantiate(wheelPrefab, newAgentPosition + new Vector3(-0.2f, 0.055f, -0.255f), Quaternion.Euler(0, 0, 0));
+                    GameObject wheel4 = Instantiate(wheelPrefab, newAgentPosition + new Vector3(-0.2f, 0.055f, 0.288f), Quaternion.Euler(0, 0, 0));
+
+                    wheel1.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+                    wheel2.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+                    wheel3.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+                    wheel4.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+
+                    wheel1.transform.parent = agents[agent.id].transform;
+                    wheel2.transform.parent = agents[agent.id].transform;
+                    wheel3.transform.parent = agents[agent.id].transform;
+                    wheel4.transform.parent = agents[agent.id].transform;
                 }
                 else
                 {
@@ -227,6 +244,13 @@ public class AgentController : MonoBehaviour
                     currPositions[agent.id] = newAgentPosition;
                 }
             }
+
+
+void InstantiateWheel(Vector3 position)
+{
+    GameObject wheel = Instantiate(wheelPrefab, position, Quaternion.Euler(0, -90, 0));
+    // Ajusta la escala, posición, rotación o cualquier otra configuración específica que necesites para las ruedas.
+}
 
             updated = true;
             if (!started) started = true;

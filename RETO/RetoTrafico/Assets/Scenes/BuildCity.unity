@@ -244,9 +244,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983bc179e80f15347a79dd7b044746e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 919132149155446097, guid: 3bb0a5f19b9bc4743b9d2d8ca43d8a30, type: 3}
+  agentPrefab: {fileID: 919132149155446097, guid: f32766c7150348c4583c8681682a8899, type: 3}
   obstaclePrefab: {fileID: 919132149155446097, guid: a930b266f669fab48ab4ffb8ee7eaa86, type: 3}
   floor: {fileID: 8796179709408692567, guid: 2e44e2bc259e1314fb7666cc16f3ff1e, type: 3}
+  ruedish: {fileID: 0}
   NAgents: 10
   width: 0
   height: 0
