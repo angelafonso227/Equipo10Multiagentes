@@ -5,6 +5,8 @@ from randomAgents.agent import Car, Destination, Obstacle, Traffic_Light, Road
 import json
 import random
 import time
+import requests
+import json
 
 class CityModel(Model):
     """ 
@@ -21,6 +23,7 @@ class CityModel(Model):
         self.num_agents = N
         self.traffic_lights = []
         self.destinations_positions = [(4, 22), (13, 22), (11, 20), (21, 20), (3, 19), (2, 15), (21, 15), (5, 14), (11, 14), (17, 14), (19, 7), (2, 6), (11, 6), (5, 4), (14, 3), (21, 3)]
+        self.eliminados= 0
         
 
         # Load the map file. The map file is a text file where each character represents an agent.
@@ -98,12 +101,17 @@ class CityModel(Model):
             self.schedule.add(new_agent)
 
     def step(self):
+        print(self.schedule.steps)
         '''Advance the model by one step.'''
         # Añade un nuevo carro cada 4 pasos
-        if self.schedule.steps % 5 == 0:
-            if self.num_agents <=3000:
+        if self.schedule.steps % 3 == 0:
+            if self.num_agents <=300000:
                 self.add_car()
             else: 
                 pass
+            
+        if self.schedule.steps == 1000:
+            self.running = False
+            
 
         self.schedule.step()

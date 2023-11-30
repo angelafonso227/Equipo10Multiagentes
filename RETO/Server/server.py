@@ -35,7 +35,7 @@ def getAgents():
     if request.method == 'GET':
         # for a in cityModel.grid.coord_iter():
         #     print(a)
-        agentPositions = [{"id": str(agent.unique_id), "x": pos[0], "y":0, "z":pos[1]-1} 
+        agentPositions = [{"id": str(agent.unique_id), "x": pos[0], "y":0, "z":pos[1]-1, "eliminado": agent.eliminated} 
                           for agents, pos in cityModel.grid.coord_iter() 
                           for agent in agents
                           if isinstance(agent, Car)]

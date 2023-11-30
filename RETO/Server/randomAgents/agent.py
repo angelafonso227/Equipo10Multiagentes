@@ -78,7 +78,7 @@ class Car(Agent):
         new_pos = ((x + displacement[0]) % self.model.grid.width, (y + displacement[1]) % self.model.grid.height)
         
         if any(isinstance(agent, Car) for agent in self.model.grid.get_cell_list_contents([new_pos])):
-            print("Atorado")  # Puedes poner aquí el código que deseas ejecutar cuando la nueva posición está ocupada por otro agente Car
+            pass  # Puedes poner aquí el código que deseas ejecutar cuando la nueva posición está ocupada por otro agente Car
         else:
             # Mover el agente a la nueva posición en la cuadrícula
             self.model.grid.move_agent(self, new_pos)
@@ -88,6 +88,8 @@ class Car(Agent):
         if destination_agent:
             self.model.grid.remove_agent(self)
             self.eliminated = True  # Marcar el agente como eliminado
+            self.model.eliminados+=1
+            
 
     def step(self):
         """ 

@@ -23,43 +23,34 @@ public class AgentData
     */
     public string id;
     public float x, y, z;
+    public bool eliminado;
     public bool estado;
 
-    public AgentData(string id, float x, float y, float z)
+    public AgentData(string id, float x, float y, float z, bool eliminado)
     {
         this.id = id;
         this.x = x;
         this.y = y;
         this.z = z;
-    }
-
-    public AgentData(string id, float x, float y, float z, bool estado)
-    {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.eliminado= eliminado;
         this.estado = estado;
-
     }
 }
-
 [Serializable]
 
 public class AgentsData
 {
-    /*
-    The AgentsData class is used to store the data of all the agents.
-
-    Attributes:
-        positions (list): A list of AgentData objects.
-    */
     public List<AgentData> positions;
     public List<AgentData> estado;
+    public List<AgentData> eliminado;
 
-    public AgentsData() => this.positions = new List<AgentData>();
+    public AgentsData()
+    {
+        this.positions = new List<AgentData>();
+        this.estado = new List<AgentData>();
+        this.eliminado = new List<AgentData>();
+    }
 }
-
 public class AgentController : MonoBehaviour
 {
     /*
@@ -100,6 +91,8 @@ public class AgentController : MonoBehaviour
     Dictionary<string, GameObject> agents;
     Dictionary<string, Vector3> prevPositions, currPositions;
     Dictionary<string, GameObject> wheels = new Dictionary<string, GameObject>();
+    List<GameObject> lucesList = new List<GameObject>();
+
 
     bool updated = false, started = false;
 
@@ -161,6 +154,7 @@ public class AgentController : MonoBehaviour
             // dt = t * t * ( 3f - 2f*t);
         }
     }
+    
 
     IEnumerator UpdateSimulation()
     {
@@ -228,6 +222,13 @@ public class AgentController : MonoBehaviour
             {
                 Vector3 newAgentPosition = new Vector3(agent.x, agent.y, agent.z);
 
+                if (agent.eliminado)
+                {
+                    // Destruir el objeto si está marcado como eliminado
+                    Destroy(agents[agent.id]);
+                    continue; // Saltar a la siguiente iteración del bucle
+                }
+
                 if (!prevPositions.ContainsKey(agent.id))
                 {
                     prevPositions[agent.id] = newAgentPosition;
@@ -258,6 +259,12 @@ public class AgentController : MonoBehaviour
                     currPositions[agent.id] = newAgentPosition;
                 }
             }
+            updated = true;
+            if (!started) started = true;
+        }
+    }
+
+
 
 
 void InstantiateWheel(Vector3 position)
@@ -265,11 +272,6 @@ void InstantiateWheel(Vector3 position)
     GameObject wheel = Instantiate(wheelPrefab, position, Quaternion.Euler(0, -90, 0));
     // Ajusta la escala, posición, rotación o cualquier otra configuración específica que necesites para las ruedas.
 }
-
-            updated = true;
-            if (!started) started = true;
-        }
-    }
 
 
     IEnumerator GetObstacleData()
@@ -298,7 +300,9 @@ void InstantiateWheel(Vector3 position)
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
+        {
             Debug.Log(www.error);
+        }
         else
         {
             lightData = JsonUtility.FromJson<AgentsData>(www.downloadHandler.text);
@@ -308,7 +312,9 @@ void InstantiateWheel(Vector3 position)
             foreach (AgentData light in lightData.positions)
             {
                 GameObject luces = Instantiate(lightPrefab, new Vector3(light.x, light.y + 1, light.z), Quaternion.identity);
-            
+                luces.name = light.id; // Asignar un nombre único a la luz
+                lucesList.Add(luces);
+
                 // Supongamos que la luz tiene un componente de tipo Light. Ajusta esto según tu implementación.
                 Light luzComponent = luces.GetComponent<Light>();
 
@@ -327,6 +333,31 @@ void InstantiateWheel(Vector3 position)
                 else
                 {
                     Debug.LogError("No se encontró el componente Light en el objeto luces.");
+                }
+            }
+        }
+    }
+
+    // Método para actualizar el color de la luz después del cambio de estado
+    void UpdateLightColor(AgentData light)
+    {
+        // Supongamos que light.id es el identificador único de la luz
+        GameObject luzToUpdate = lucesList.Find(luz => luz.name == light.id);
+
+        if (luzToUpdate != null)
+        {
+            Light luzComponent = luzToUpdate.GetComponent<Light>();
+
+            if (luzComponent != null)
+            {
+                // Actualizar color según el nuevo estado de la luz
+                if (light.estado)
+                {
+                    luzComponent.color = Color.green;
+                }
+                else
+                {
+                    luzComponent.color = Color.red;
                 }
             }
         }
