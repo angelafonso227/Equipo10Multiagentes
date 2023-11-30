@@ -26,7 +26,7 @@ class CityModel(Model):
         with open('D:/Documentos/ACTIVIDADES TEC/QUINTO SEMESTRE/Multiagentes/Equipo10Multiagentes/RETO/Server/randomAgents/city_files/2023_base.txt') as baseFile:
             lines = baseFile.readlines()
             self.width = len(lines[0])-1
-            self.height = len(lines)
+            self.height = len(lines)-1
 
             self.grid = MultiGrid(self.width, self.height, torus=False) 
             self.schedule = RandomActivation(self)
@@ -79,7 +79,7 @@ class CityModel(Model):
     def step(self):
         '''Advance the model by one step.'''
         # Añade un nuevo carro cada 4 pasos
-        if self.schedule.steps % 50 == 0:
+        if self.schedule.steps % 5 == 0:
             if self.num_agents <=3000:
                 self.add_car()
             else: 
